@@ -15,11 +15,11 @@ class FornecedorController {
         const data = request.only(['nome', 'idade', 'email', 'telefone', 'cnpj']);
         const novoFornecedor = new Fornecedor();
         novoFornecedor.fill(data);
-
         try {
             await novoFornecedor.save();
             return response.status(201).json(novoFornecedor);
         } catch (error) {
+            console.log(error);
             return response.status(500).json({ error: 'Erro ao inserir fornecedor.' });
         }
     }
