@@ -17,8 +17,13 @@
 const Route = use('Route')
 const Database = use('Database')
 
-Route.get('/teste', async () => {
-    return await Database.table('tbl_fornecedor').select('*')
-})
+Route.group(()=>{
+    Route.get('/fornecedor', 'FornecedorController.index');
+    Route.get('/fornecedor/:id', 'FornecedorController.show');
+    Route.post('/fornecedor', 'FornecedorController.store');
+    Route.put('/fornecedor/:id', 'FornecedorController.update');
+    Route.delete('/fornecedor/:id', 'FornecedorController.destroy');
+}).prefix('/api');
 
-Route.on('/').render('welcome')
+
+
