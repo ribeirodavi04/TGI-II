@@ -20,6 +20,7 @@ class FornecedorController {
             await novoFornecedor.save();
             return response.status(201).json(novoFornecedor);
         } catch (error) {
+            console.log(error)
             return response.status(500).json({ error: 'Erro ao inserir fornecedor.' });
         }
     }

@@ -76,7 +76,6 @@ module.exports = {
       user: Env.get('DB_USER', 'postgres'),
       password: Env.get('DB_PASSWORD', 'lala123'),
       database: Env.get('DB_DATABASE', 'TGI-II')
-
     }
   }
 }
