@@ -16,10 +16,12 @@ class FornecedorController {
         const novoFornecedor = new Fornecedor();
         novoFornecedor.fill(data);
         try {
-            await novoFornecedor.save();
-            return response.status(201).json(novoFornecedor);
+            // Em algum lugar do seu código
+           
+            await novoFornecedor.save(); debugger;
+            return response.status(201).json(novoFornecedor);debugger;
         } catch (error) {
-            console.log(error);
+            console.log(error) 
             return response.status(500).json({ error: 'Erro ao inserir fornecedor.' });
         }
     }
