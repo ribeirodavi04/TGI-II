@@ -13,17 +13,18 @@ class Fornecedor extends Model {
     }
     
     static get fillable() {
-        return ['nome', 'idade', 'email', 'telefone', 'cnpj'];
+        return ['nome', 'email', 'telefone', 'cnpj', 'endereco', 'observacoes'];
     }
     
     // Opcional: se você desejar adicionar regras de validação
     static get rules() {
         return {
           nome: 'required|max:50',
-          idade: 'integer',
           email: 'required|email|max:100',
           telefone: 'required|telefone|max:20',
           cnpj: 'required|cnpj|max:20',
+          endereco: 'required|cnpj|max:20',
+          observacoes: 'required|cnpj|max:20',
         };
     }
 }

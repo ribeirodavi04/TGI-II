@@ -12,7 +12,7 @@ class FornecedorController {
     }
 
     async store({ request, response }) {
-        const data = request.only(['nome', 'idade', 'email', 'telefone', 'cnpj']);
+        const data = request.only(['nome', 'email', 'telefone', 'cnpj', 'endereco', 'observacoes']);
         const novoFornecedor = new Fornecedor();
         novoFornecedor.fill(data);
         try {
@@ -28,7 +28,7 @@ class FornecedorController {
 
     async update({ params, request, response }) {
         const fornecedor = await Fornecedor.find(params.id);
-        const data = request.only(['nome', 'idade', 'email', 'telefone', 'cnpj']);
+        const data = request.only(['nome',  'email', 'telefone', 'cnpj','endereco', 'observacoes']);
         fornecedor.merge(data);
 
         try {
