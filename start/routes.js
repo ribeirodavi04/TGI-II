@@ -16,13 +16,21 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 const Database = use('Database')
-
+//Fornecedores
 Route.group(()=>{
     Route.get('/fornecedor', 'FornecedorController.index');
     Route.get('/fornecedor/:id', 'FornecedorController.show');
     Route.post('/fornecedor', 'FornecedorController.store');
     Route.put('/fornecedor/:id', 'FornecedorController.update');
     Route.delete('/fornecedor/:id', 'FornecedorController.destroy');
+}).prefix('/api');
+//Materiais
+Route.group(()=>{
+    Route.get('/material', 'MaterialController.index');
+    Route.get('/material/:id', 'MaterialController.show');
+    Route.post('/material', 'MaterialController.store');
+    Route.put('/material/:id', 'MaterialController.update');
+    Route.delete('/material/:id', 'MaterialController.destroy');
 }).prefix('/api');
 
 
