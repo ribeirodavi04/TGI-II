@@ -1,5 +1,6 @@
 'use strict'
 
+
 /*
 |--------------------------------------------------------------------------
 | Routes
@@ -18,11 +19,8 @@ const Route = use('Route')
 const Database = use('Database')
 
 Route.group(()=>{
-    Route.get('/fornecedor', 'FornecedorController.index');
-    Route.get('/fornecedor/:id', 'FornecedorController.show');
-    Route.post('/fornecedor', 'FornecedorController.store');
-    Route.put('/fornecedor/:id', 'FornecedorController.update');
-    Route.delete('/fornecedor/:id', 'FornecedorController.destroy');
+    Route.resource('/fornecedor', 'FornecedorController').apiOnly();
+    Route.resource('/cliente', 'ClienteController').apiOnly();
 }).prefix('/api');
 
 
