@@ -24,6 +24,8 @@ Route.group(()=>{
     Route.resource('/material', 'MaterialController').apiOnly();
     Route.resource('/escritorio', 'EscritorioController').apiOnly();
     Route.resource('/permissao', 'PermissaoUsuarioController').apiOnly();
+    Route.resource('/usuario', 'UsuarioController').apiOnly();
+    Route.resource('/projeto', 'ProjetoController').apiOnly();
 
 }).prefix('/api');
 
