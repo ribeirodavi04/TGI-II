@@ -22,6 +22,10 @@ class Material extends Model {
             nome: 'required|nome|max:50',
         };
     }
+    
+    fornecedor() {
+        return this.belongsTo('App/Models/Fornecedor', 'id_fornecedor', 'id_fornecedor');
+    }
 
 }
 

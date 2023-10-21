@@ -26,7 +26,11 @@ Route.group(()=>{
     Route.resource('/permissao', 'PermissaoUsuarioController').apiOnly();
     Route.resource('/usuario', 'UsuarioController').apiOnly();
     Route.resource('/projeto', 'ProjetoController').apiOnly();
-
+    Route.resource('/etapaProjeto', 'EtapaProjetoController').apiOnly();
+    Route.resource('/orcamentoMaterialProjeto', 'OrcamentoMaterialProjetoController').apiOnly();
+    Route.resource('/orcamentoProjeto', 'OrcamentoProjetoController').apiOnly();
+    Route.resource('/imagemProjeto', 'ImagemProjetoController').apiOnly();
+    Route.resource('/documentoProjeto', 'DocumentoProjetoController').apiOnly();
 }).prefix('/api');
 
 

@@ -26,6 +26,14 @@ class Projeto extends Model {
             descricao: 'max:100',
         };
     }
+
+    cliente() {
+        return this.belongsTo('App/Models/Cliente', 'id_cliente', 'id_cliente');
+    }
+
+    usuario() {
+        return this.belongsTo('App/Models/Usuario', 'id_usuario_responsavel', 'id_usuario');
+    }
 }
 
 module.exports = Projeto

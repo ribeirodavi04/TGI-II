@@ -13,7 +13,7 @@ class Usuario extends Model {
     }
 
     static get fillable() {
-        return ['id_usuario','id_escritorio', 'id_permissao_usuario', 'nome', 'nome_usuario', 'email', 'senha', 'telefone', 'cpf', 'data_nascimento', 'genero', 'endereco', 'imagem' ];
+        return ['id_usuario', 'id_escritorio', 'id_permissao_usuario', 'nome', 'nome_usuario', 'email', 'senha', 'telefone', 'cpf', 'data_nascimento', 'genero', 'endereco', 'imagem'];
     }
 
     static get rules() {
@@ -29,6 +29,14 @@ class Usuario extends Model {
             endereco: 'required|endereco|max:50',
             imagem: 'file_ext:png,jpg,jpeg',
         };
+    }
+
+    escritorio() {
+        return this.belongsTo('App/Models/Escritorio', 'id_escritorio', 'id_escritorio');
+    }
+
+    permissaoUsuario() {
+        return this.belongsTo('App/Models/PermissaoUsuario', 'id_permissao_usuario', 'id_permissao_usuario');
     }
 }
 
