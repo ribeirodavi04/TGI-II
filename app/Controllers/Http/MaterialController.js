@@ -13,7 +13,7 @@ class MaterialController {
   }
 
   async store({ request, response }) {
-    const data = request.only(['nome', 'tipo', 'descricao', 'preco_unitario']);
+    const data = request.only(['id_fornecedor', 'nome', 'tipo', 'descricao', 'preco_unitario']);
     const novoMaterial = new Material();
     novoMaterial.fill(data);
 
@@ -28,7 +28,7 @@ class MaterialController {
 
   async update({ params, request, response }) {
     const material = await Material.find(params.id);
-    const data = request.only(['nome', 'tipo', 'descricao', 'preco_unitario']);
+    const data = request.only(['id_fornecedor', 'nome', 'tipo', 'descricao', 'preco_unitario']);
     material.merge(data);
 
     try {

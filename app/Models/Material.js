@@ -13,12 +13,13 @@ class Material extends Model {
     }
 
     static get fillable() {
-        return ['nome', 'tipo', 'descricao', 'preco_unitario'];
+        return ['id_fornecedor','nome', 'tipo', 'descricao', 'preco_unitario'];
     }
 
     static get rules() {
         return {
-          nome: 'required|nome|max:50',
+            id_fornecedor: 'required',
+            nome: 'required|nome|max:50',
         };
     }
 

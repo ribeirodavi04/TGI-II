@@ -17,7 +17,7 @@ class AddMaterialSchema extends Schema {
   }
 
   down () {
-    this.drop('tbl_materials')
+    this.drop('tbl_material')
   }
 }
 
