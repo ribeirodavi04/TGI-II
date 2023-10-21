@@ -17,12 +17,14 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 const Database = use('Database')
-//Fornecedores
+
 Route.group(()=>{
     Route.resource('/fornecedor', 'FornecedorController').apiOnly();
     Route.resource('/cliente', 'ClienteController').apiOnly();
     Route.resource('/material', 'MaterialController').apiOnly();
     Route.resource('/escritorio', 'EscritorioController').apiOnly();
+    Route.resource('/permissao', 'PermissaoUsuarioController').apiOnly();
+
 }).prefix('/api');
 
 
