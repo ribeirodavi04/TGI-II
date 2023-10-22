@@ -33,6 +33,8 @@ Route.group(()=>{
     Route.resource('/documentoProjeto', 'DocumentoProjetoController').apiOnly();
 
     Route.get('/projetoAllInfo/:id', 'ProjetoController.showAllInfo');
+    Route.post('/projeto/:id/imagem', 'ProjetoController.uploadImagem');
+    Route.post('/projeto/:id/documento', 'ProjetoController.uploadDocumento');
 
 }).prefix('/api');
 

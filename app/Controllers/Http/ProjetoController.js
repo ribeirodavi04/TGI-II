@@ -1,6 +1,10 @@
 'use strict'
 
 const Projeto = use('App/Models/Projeto');
+const Helpers = use('Helpers');
+const ImagemProjeto = use('App/Models/ImagemProjeto');
+const DocumentoProjeto = use('App/Models/DocumentoProjeto');
+const fs = use('fs');
 
 class ProjetoController {
     async index({ response }) {
@@ -69,6 +73,91 @@ class ProjetoController {
 
         return response.json(projeto);
     }
+
+    criarPastaParaProjeto(projetoId) {
+        const pastaDoProjeto = Helpers.publicPath(`uploads/projeto_${projetoId}`);
+
+        // Verifique se a pasta já existe
+        if (!fs.existsSync(pastaDoProjeto)) {
+            // Se não existir, crie a pasta
+            fs.mkdirSync(pastaDoProjeto);
+        }
+
+        return pastaDoProjeto;
+    }
+
+    async uploadImagem({ params, request, response }) {
+        const projetoId = params.id;
+        const pastaDoProjeto = this.criarPastaParaProjeto(projetoId);
+
+        const imagem = request.file('imagem', {
+            types: ['image'],
+            size: '2mb',
+        });
+
+        if (!imagem) {
+            return response.status(400).json({ error: 'Imagem não fornecida' });
+        }
+
+        // Salve a imagem na pasta específica do projeto
+        await imagem.move(pastaDoProjeto + '/imagens/', {
+            name: `projeto_${projetoId}_imagem_${new Date().getTime()}.${imagem.extname}`,
+            overwrite: true,
+        });
+
+        if (!imagem.moved()) {
+            return response.status(500).json({ error: 'Erro ao salvar a imagem' });
+        }
+
+        // Crie um registro na tabela ImagemProjeto
+        const imagemProjeto = new ImagemProjeto();
+        imagemProjeto.id_projeto = projetoId;
+        imagemProjeto.nome = imagem.fileName;
+        imagemProjeto.tipo = request.input('tipo');
+        imagemProjeto.observacoes = request.input('observacoes');
+
+        await imagemProjeto.save();
+
+        return response.status(201).json(imagemProjeto);
+    }
+
+    async uploadDocumento({ params, request, response }) {
+        const projetoId = params.id;
+        const pastaDoProjeto = this.criarPastaParaProjeto(projetoId);
+
+        const documento = request.file('documento', {
+            types: ['pdf', 'doc', 'docx'],
+            size: '10mb',
+        });
+
+        if (!documento) {
+            return response.status(400).json({ error: 'Documento não fornecido' });
+        }
+
+        // Salve o documento na pasta específica do projeto
+        await documento.move(pastaDoProjeto + '/documentos/', {
+            name: `projeto_${projetoId}_documento_${new Date().getTime()}.${documento.extname}`,
+            overwrite: true,
+        });
+
+        if (!documento.moved()) {
+            return response.status(500).json({ error: 'Erro ao salvar o documento' });
+        }
+
+        // Crie um registro na tabela DocumentoProjeto
+        const documentoProjeto = new DocumentoProjeto();
+        documentoProjeto.id_projeto = projetoId;
+        documentoProjeto.nome = documento.fileName;
+        documentoProjeto.tipo = request.input('tipo');
+        documentoProjeto.observacoes = request.input('observacoes');
+
+        await documentoProjeto.save();
+
+        return response.status(201).json(documentoProjeto);
+    }
+
+
+
 }
 
 module.exports = ProjetoController
