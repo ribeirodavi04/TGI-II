@@ -31,6 +31,9 @@ Route.group(()=>{
     Route.resource('/orcamentoProjeto', 'OrcamentoProjetoController').apiOnly();
     Route.resource('/imagemProjeto', 'ImagemProjetoController').apiOnly();
     Route.resource('/documentoProjeto', 'DocumentoProjetoController').apiOnly();
+
+    Route.get('/projetoAllInfo/:id', 'ProjetoController.showAllInfo');
+
 }).prefix('/api');
 
 

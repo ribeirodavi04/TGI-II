@@ -27,6 +27,38 @@ class Projeto extends Model {
         };
     }
 
+
+
+    cliente() {
+        return this.belongsTo('App/Models/Cliente', 'id_cliente', 'id_cliente');
+    }
+
+    usuario() {
+        return this.belongsTo('App/Models/Usuario', 'id_usuario_responsavel', 'id_usuario');
+    }
+
+
+
+    orcamentoMateriaisProjeto() {
+        return this.hasMany('App/Models/OrcamentoMaterialProjeto', 'id_projeto', 'id_projeto');
+    }
+
+    orcamentosProjeto() {
+        return this.hasMany('App/Models/OrcamentoMaterialProjeto', 'id_projeto', 'id_projeto');
+    }
+
+    documentosProjeto() {
+        return this.hasMany('App/Models/DocumentoProjeto', 'id_projeto', 'id_projeto');
+    }
+
+    imagensProjeto() {
+        return this.hasMany('App/Models/ImagemProjeto', 'id_projeto', 'id_projeto');
+    }
+
+    etapasProjeto() {
+        return this.hasMany('App/Models/EtapaProjeto', 'id_projeto', 'id_projeto')
+    }
+
     cliente() {
         return this.belongsTo('App/Models/Cliente', 'id_cliente', 'id_cliente');
     }

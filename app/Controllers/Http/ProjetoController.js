@@ -50,6 +50,25 @@ class ProjetoController {
             return response.status(500).json({ error: 'Erro ao excluir projeto.' });
         }
     }
+
+    async showAllInfo({ params, response }) {
+        const projeto = await Projeto.query()
+            .with('orcamentoMateriaisProjeto')
+            .with('orcamentosProjeto')
+            .with('documentosProjeto')
+            .with('imagensProjeto')
+            .with('etapasProjeto')
+            .with('cliente')
+            .with('usuario')
+            .where('id_projeto', params.id)
+            .first();
+
+        if (!projeto) {
+            return response.status(404).json({ error: 'Projeto não encontrado' });
+        }
+
+        return response.json(projeto);
+    }
 }
 
 module.exports = ProjetoController
