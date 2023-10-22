@@ -13,7 +13,7 @@ class DocumentoProjeto extends Model {
     }
 
     static get fillable() {
-        return ['id_projeto', 'nome', 'tipo', 'observacoes'];
+        return ['id_projeto', 'nome', 'tipo', 'observacoes', 'url'];
     }
 
     projeto() {

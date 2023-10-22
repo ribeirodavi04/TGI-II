@@ -14,7 +14,7 @@ class DocumentoProjetoController {
     }
 
     async store({ request, response }) {
-        const data = request.only(['id_projeto', 'nome', 'tipo', 'observacoes']);
+        const data = request.only(['id_projeto', 'nome', 'tipo', 'observacoes', 'url']);
         const novoDocumento = new DocumentoProjeto();
         novoDocumento.fill(data);
 
@@ -29,7 +29,7 @@ class DocumentoProjetoController {
 
     async update({ params, request, response }) {
         const documento = await DocumentoProjeto.find(params.id);
-        const data = request.only(['id_projeto', 'nome', 'tipo', 'observacoes']);
+        const data = request.only(['id_projeto', 'nome', 'tipo', 'observacoes', 'url']);
         documento.merge(data);
 
         try {

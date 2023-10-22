@@ -13,12 +13,13 @@ class ImagemProjeto extends Model {
     }
 
     static get fillable() {
-        return ['id_projeto', 'nome', 'tipo', 'observacoes'];
+        return ['id_projeto', 'nome', 'tipo', 'observacoes', 'url'];
     }
 
     projeto() {
         return this.belongsTo('App/Models/Projeto', 'id_projeto', 'id_projeto');
     }
+    
 }
 
 module.exports = ImagemProjeto

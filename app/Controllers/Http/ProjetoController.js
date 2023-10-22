@@ -5,6 +5,7 @@ const Helpers = use('Helpers');
 const ImagemProjeto = use('App/Models/ImagemProjeto');
 const DocumentoProjeto = use('App/Models/DocumentoProjeto');
 const fs = use('fs');
+const Env = use('Env');
 
 class ProjetoController {
     async index({ response }) {
@@ -75,7 +76,7 @@ class ProjetoController {
     }
 
     criarPastaParaProjeto(projetoId) {
-        const pastaDoProjeto = Helpers.publicPath(`uploads/projeto_${projetoId}`);
+        const pastaDoProjeto = Helpers.publicPath(`uploads/projetos/projeto_${projetoId}`);
 
         // Verifique se a pasta já existe
         if (!fs.existsSync(pastaDoProjeto)) {
@@ -115,6 +116,7 @@ class ProjetoController {
         imagemProjeto.nome = imagem.fileName;
         imagemProjeto.tipo = request.input('tipo');
         imagemProjeto.observacoes = request.input('observacoes');
+        imagemProjeto.url = `${Env.get('APP_URL')}/uploads/projetos/projeto_${projetoId}/imagens/${imagem.fileName}`;
 
         await imagemProjeto.save();
 
@@ -150,6 +152,7 @@ class ProjetoController {
         documentoProjeto.nome = documento.fileName;
         documentoProjeto.tipo = request.input('tipo');
         documentoProjeto.observacoes = request.input('observacoes');
+        documentoProjeto.url = `${Env.get('APP_URL')}/uploads/projetos/projeto_${projetoId}/documentos/${documento.fileName}`;
 
         await documentoProjeto.save();
 

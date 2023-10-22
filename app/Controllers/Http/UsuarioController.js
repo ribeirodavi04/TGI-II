@@ -1,6 +1,8 @@
 'use strict'
 const Usuario = use('App/Models/Usuario');
 const Hash = use('Hash');
+const Env = use('Env');
+const Helpers = use('Helpers');
 
 class UsuarioController {
     async index({ response }) {
@@ -52,6 +54,40 @@ class UsuarioController {
             return response.status(500).json({ error: 'Erro ao excluir usuário.' });
         }
     }
+
+    async uploadImagem({ params, request, response }) {
+        const usuario = await Usuario.find(params.id);
+        const imagem = request.file('imagem', {
+            types: ['image'],
+            size: '2mb',
+        });
+
+        if (!imagem) {
+            return response.status(400).json({ error: 'Imagem não fornecida' });
+        }
+
+        // Salve a imagem no diretório do usuário
+        await imagem.move(Helpers.publicPath(`uploads/usuarios/${params.id}`), {
+            name: `perfil_${params.id}.${imagem.extname}`,
+            overwrite: true,
+        });
+
+        if (!imagem.moved()) {
+            return response.status(500).json({ error: 'Erro ao salvar a imagem' });
+        }
+
+        // Atualize o campo 'imagem' no modelo do usuário
+        usuario.imagem = `${Env.get('APP_URL')}/uploads/usuarios/${params.id}/perfil_${params.id}.${imagem.extname}`;
+
+        try {
+            await usuario.save();
+            return response.status(200).json(usuario);
+        } catch (error) {
+            return response.status(500).json({ error: 'Erro ao atualizar a imagem do usuário.' });
+        }
+    }
+
+
 }
 
 module.exports = UsuarioController

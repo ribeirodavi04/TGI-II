@@ -35,6 +35,7 @@ Route.group(()=>{
     Route.get('/projetoAllInfo/:id', 'ProjetoController.showAllInfo');
     Route.post('/projeto/:id/imagem', 'ProjetoController.uploadImagem');
     Route.post('/projeto/:id/documento', 'ProjetoController.uploadDocumento');
+    Route.post('/usuarios/:id/imagem', 'UsuarioController.uploadImagem')
 
 }).prefix('/api');
 

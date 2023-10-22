@@ -14,7 +14,7 @@ class ImagemProjetoController {
     }
 
     async store({ request, response }) {
-        const data = request.only(['id_projeto', 'nome', 'tipo', 'observacoes']);
+        const data = request.only(['id_projeto', 'nome', 'tipo', 'observacoes', 'url']);
         const novaImagem = new ImagemProjeto();
         novaImagem.fill(data);
 
@@ -29,7 +29,7 @@ class ImagemProjetoController {
 
     async update({ params, request, response }) {
         const imagem = await ImagemProjeto.find(params.id);
-        const data = request.only(['id_projeto', 'nome', 'tipo', 'observacoes']);
+        const data = request.only(['id_projeto', 'nome', 'tipo', 'observacoes', 'url']);
         imagem.merge(data);
 
         try {
