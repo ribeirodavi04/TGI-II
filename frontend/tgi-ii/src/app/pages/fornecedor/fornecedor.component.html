@@ -24,7 +24,7 @@
                                 <td> {{ fornecedor.telefone}} </td>
                                 <td> {{ fornecedor.cnpj }} </td>
                                 <td>
-                                    <button class="btn btn-primary mr-2">
+                                    <button class="btn btn-primary mr-2" (click)="openModalFornecedor(fornecedor)">
                                         <i class="nc-icon nc-ruler-pencil"></i>
                                     </button>
                                     <button class="btn btn-danger">

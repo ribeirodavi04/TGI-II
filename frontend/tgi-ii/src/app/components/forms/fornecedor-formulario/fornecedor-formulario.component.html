@@ -1,4 +1,5 @@
 
+    <div class="modal-content" style="z-index: 10;">
         <div class="modal-header">
             <h1>Fornecedor</h1>
             <button type="button" class="close" (click)="close()">
@@ -41,6 +42,9 @@
                         [(ngModel)]="fornecedor.observacoes"></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="submit" class="btn btn-primary" (click)="salvarFornecedor()">Salvar</button>
             </form>
         </div>
+    </div>
+
+        

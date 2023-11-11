@@ -20,7 +20,6 @@ export class FornecedorComponent implements OnInit {
 
   constructor(
     private fornecedorService: FornecedorService,
-    private dialogRef : MatDialog, 
     private modalService : NgbModal) { 
 
     this.getFornecedores();
@@ -34,9 +33,12 @@ export class FornecedorComponent implements OnInit {
     this.fornecedorList$ = this.fornecedorService.getFornecedores();
   }
   
-  openModalFornecedor() {
-    this.modalService.open(FornecedorFormularioComponent);
+  openModalFornecedor(fornecedor?: Fornecedor) {
+    const modalRef  = this.modalService.open(FornecedorFormularioComponent);
+    if(fornecedor) {
+      modalRef.componentInstance.fornecedor = fornecedor;
+      modalRef.componentInstance.modoEdicao = true;
+    }
   }
- 
 
 }
