@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Fornecedor } from 'app/models/Fornecedor.model';
 import { FornecedorService } from 'app/services/fornecedor.service';
 import { Observable } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
 import { FornecedorFormularioComponent } from 'app/components/forms/fornecedor-formulario/fornecedor-formulario.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -13,10 +12,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   moduleId: module.id
 })
 
-
 export class FornecedorComponent implements OnInit {
 
   fornecedorList$ = new Observable<Fornecedor[]>();
+
+  currentPage = 1;
+  itemsPerPage = 10; 
 
   constructor(
     private fornecedorService: FornecedorService,
@@ -34,11 +35,10 @@ export class FornecedorComponent implements OnInit {
   }
   
   openModalFornecedor(fornecedor?: Fornecedor) {
-    const modalRef  = this.modalService.open(FornecedorFormularioComponent);
+    const modalRef = this.modalService.open(FornecedorFormularioComponent);
     if(fornecedor) {
       modalRef.componentInstance.fornecedor = fornecedor;
       modalRef.componentInstance.modoEdicao = true;
     }
   }
-
 }

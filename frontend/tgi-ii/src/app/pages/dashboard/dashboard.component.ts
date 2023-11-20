@@ -166,7 +166,7 @@ export class DashboardComponent implements OnInit{
       var speedCanvas = document.getElementById("speedChart");
 
       var dataFirst = {
-        data: [0, 19, 15, 20, 30, 40, 40, 50, 25, 30, 50, 70],
+        data: [7, 5, 8, 7, 7, 6, 8, 5, 4, 5, 6, 6],
         fill: false,
         borderColor: '#fbc658',
         backgroundColor: 'transparent',
@@ -176,20 +176,10 @@ export class DashboardComponent implements OnInit{
         pointBorderWidth: 8,
       };
 
-      var dataSecond = {
-        data: [0, 5, 10, 12, 20, 27, 30, 34, 42, 45, 55, 63],
-        fill: false,
-        borderColor: '#51CACF',
-        backgroundColor: 'transparent',
-        pointBorderColor: '#51CACF',
-        pointRadius: 4,
-        pointHoverRadius: 4,
-        pointBorderWidth: 8
-      };
-
+    
       var speedData = {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [dataFirst, dataSecond]
+        labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+        datasets: [dataFirst]
       };
 
       var chartOptions = {

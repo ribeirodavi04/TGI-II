@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Fornecedor } from 'app/models/Fornecedor.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FornecedorService } from 'app/services/fornecedor.service';
-import { response } from 'express';
 
 @Component({
   selector: 'fornecedor-formulario',
@@ -38,23 +37,23 @@ export class FornecedorFormularioComponent implements OnInit {
 
   salvarFornecedor() {
     if (this.modoEdicao) {
-      this.fornecedorService.updateFornecedor(this.fornecedor).subscribe(
-        (response) => {
+      this.fornecedorService.updateFornecedor(this.fornecedor).subscribe({
+        next: (response) => {        
           this.activeModal.close('Fornecedor atualizado com sucesso');
         },
-        (error) => {
+        error: (error) => {
           console.error('Erro ao atualizar fornecedor', error);
         }
-      )
+      });
     } else {
-      this.fornecedorService.addFornecedor(this.fornecedor).subscribe(
-        (response) => {
-          this.activeModal.close('Fornecedor cadastrado com sucesso')
+      this.fornecedorService.addFornecedor(this.fornecedor).subscribe({
+        next: (response) => {
+          this.activeModal.close('Fornecedor adicionado com sucesso');
         },
-        (error) => {
-          console.error('Erro ao criar fornecedor', error)
+        error: (error) => {
+          console.error('Erro ao adicionar fornecedor', error);
         }
-      )
+      });
     }
 
     this.activeModal.close('Operação concluída');
@@ -63,4 +62,6 @@ export class FornecedorFormularioComponent implements OnInit {
   close() {
     this.activeModal.close('Modal fechado');
   }
+
+
 }

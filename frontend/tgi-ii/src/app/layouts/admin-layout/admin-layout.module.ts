@@ -21,8 +21,11 @@ import { NotificationsComponent }   from '../../pages/notifications/notification
 import { UpgradeComponent }         from '../../pages/upgrade/upgrade.component';
 import { FornecedorComponent }      from '../../pages/fornecedor/fornecedor.component';
 import { FornecedorFormularioComponent } from 'app/components/forms/fornecedor-formulario/fornecedor-formulario.component';
+import { ClienteComponent } from 'app/pages/cliente/cliente.component';
+import { ClienteFormularioComponent } from 'app/components/forms/cliente-formulario/cliente-formulario.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   imports: [
@@ -36,7 +39,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatIconModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   declarations: [
     DashboardComponent,
@@ -48,7 +52,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MapsComponent,
     NotificationsComponent,
     FornecedorComponent,
-    FornecedorFormularioComponent
+    FornecedorFormularioComponent,
+    ClienteComponent,
+    ClienteFormularioComponent
   ]
 })
 

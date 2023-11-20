@@ -3,8 +3,8 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    <h3>Fornecedores</h3>
-                    <button mat-raised-button class="btn btn-primary" (click)="openModalFornecedor()">Cadastrar</button>
+                    <h3>Clientes</h3>
+                    <button mat-raised-button class="btn btn-primary" (click)="openModalCliente()">Cadastrar</button>
                 </div>
             </div>
             <div class="card-body">
@@ -14,17 +14,17 @@
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Telefone</th>
-                            <th>CNPJ</th>
+                            <th>CPF/CNPJ</th>
                             <th>Ações</th>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let fornecedor of fornecedorList$ | async | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: (fornecedorList$ | async)?.length }">
-                                <td> {{ fornecedor.nome }} </td>
-                                <td> {{ fornecedor.email}} </td>
-                                <td> {{ fornecedor.telefone}} </td>
-                                <td> {{ fornecedor.cnpj }} </td>
+                            <tr *ngFor="let cliente of clienteList$ | async | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: (clienteList$ | async)?.length }">
+                                <td> {{ cliente.nome }} </td>
+                                <td> {{ cliente.email}} </td>
+                                <td> {{ cliente.telefone}} </td>
+                                <td> {{ cliente.cpf_cnpj }} </td>
                                 <td>
-                                    <button class="btn btn-primary mr-2" (click)="openModalFornecedor(fornecedor)">
+                                    <button class="btn btn-primary mr-2" (click)="openModalCliente(cliente)">
                                         <i class="nc-icon nc-ruler-pencil"></i>
                                     </button>
                                     <button class="btn btn-danger">

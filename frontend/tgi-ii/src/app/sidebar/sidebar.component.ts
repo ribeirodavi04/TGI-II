@@ -9,15 +9,15 @@ export interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard',     title: 'Dashboard',         icon:'nc-bank',       class: '' },
-    { path: '/icons',         title: 'Icons',             icon:'nc-diamond',    class: '' },
-    { path: '/maps',          title: 'Maps',              icon:'nc-pin-3',      class: '' },
-    { path: '/notifications', title: 'Notifications',     icon:'nc-bell-55',    class: '' },
-    { path: '/user',          title: 'User Profile',      icon:'nc-single-02',  class: '' },
-    { path: '/table',         title: 'Table List',        icon:'nc-tile-56',    class: '' },
-    { path: '/typography',    title: 'Typography',        icon:'nc-caps-small', class: '' },
-    { path: '/upgrade',       title: 'Upgrade to PRO',    icon:'nc-spaceship',  class: 'active-pro' },
-    { path: '/fornecedor',    title: 'Fornecedor',        icon:'nc-spaceship',  class: '' },
+    { path: '/dashboard',     title: 'Home',         icon:'nc-bank',       class: '' },
+    { path: '/icons',         title: 'Projetos',             icon:'nc-ruler-pencil',    class: '' },
+    { path: '/cliente',       title: 'Clientes',              icon:'nc-single-02',      class: '' },
+    { path: '/fornecedor',    title: 'Fornecedores',        icon:'nc-delivery-fast',  class: '' },
+    { path: '/notifications', title: 'Usuários',     icon:'nc-circle-10',    class: '' },
+    //{ path: '/user',          title: 'User Profile',      icon:'nc-single-02',  class: '' },
+    //{ path: '/table',         title: 'Table List',        icon:'nc-tile-56',    class: '' },
+    //{ path: '/typography',    title: 'Typography',        icon:'nc-caps-small', class: '' },
+    //{ path: '/upgrade',       title: 'Upgrade to PRO',    icon:'nc-spaceship',  class: 'active-pro' },
 ];
 
 @Component({

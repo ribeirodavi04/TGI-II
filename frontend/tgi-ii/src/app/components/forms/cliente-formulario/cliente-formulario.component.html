@@ -1,0 +1,49 @@
+<div class="modal-content" style="z-index: 10;">
+    <div class="modal-header">
+        <h1>Cliente</h1>
+        <button type="button" class="close" (click)="close()">
+            <span>&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" class="form-control" [(ngModel)]="cliente.nome">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" [(ngModel)]="cliente.email">
+            </div>
+
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="text" id="telefone" name="telefone" class="form-control"
+                    [(ngModel)]="cliente.telefone">
+            </div>
+
+            <div class="form-group">
+                <label for="cnpj">CNPJ</label>
+                <input type="text" id="cnpj" name="cnpj" class="form-control" [(ngModel)]="cliente.cpf_cnpj">
+            </div>
+
+            <div class="form-group">
+                <label for="endereco">Endereço</label>
+                <input type="text" id="endereco" name="endereco" class="form-control"
+                    [(ngModel)]="cliente.endereco">
+            </div>
+
+            <div class="form-group">
+                <label for="observacoes">Observação</label>
+                <textarea id="observacoes" name="observacoes" class="form-control"
+                    [(ngModel)]="cliente.observacoes"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" (click)="salvarCliente()">Salvar</button>
+        </form>
+    </div>
+</div>
+
+    
