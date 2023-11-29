@@ -10,6 +10,7 @@ import { NotificationsComponent } from '../../pages/notifications/notifications.
 import { UpgradeComponent } from '../../pages/upgrade/upgrade.component';
 import { FornecedorComponent } from '../../pages/fornecedor/fornecedor.component';
 import { ClienteComponent } from '../../pages/cliente/cliente.component';
+import { MaterialComponent } from 'app/pages/material/material.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -21,5 +22,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps',           component: MapsComponent },
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'upgrade',        component: UpgradeComponent },
-    { path: 'cliente',        component: ClienteComponent}
+    { path: 'cliente',        component: ClienteComponent},
+    { path: 'material',       component: MaterialComponent}
 ];

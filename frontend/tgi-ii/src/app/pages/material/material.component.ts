@@ -1,31 +1,30 @@
 import { Component, OnInit, inject, TemplateRef } from '@angular/core';
+import { Material } from 'app/models/Material.model';
+import { MaterialService } from 'app/services/material/material.service';
 import { Fornecedor } from 'app/models/Fornecedor.model';
 import { FornecedorService } from 'app/services/fornecedor.service';
 import { Observable } from 'rxjs';
-import { NgbModal,  ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'fornecedor',
-  templateUrl: './fornecedor.component.html',
-  styleUrls: ['./fornecedor.component.css'],
+  selector: 'material',
+  templateUrl: './material.component.html',
+  styleUrls: ['./material.component.css'],
   moduleId: module.id
 })
+export class MaterialComponent implements OnInit {
 
-export class FornecedorComponent implements OnInit {
-
-  fornecedorList$ = new Observable<Fornecedor[]>();
-
-  fornecedor: Fornecedor = {
+  materialList$ = new Observable<Material[]>();
+  fornecedores: Fornecedor[] = [];
+  material: Material = {
+    id_material: 0,
     id_fornecedor: 0,
-    nome: '',
-    email: '',
-    telefone: '',
-    cnpj: '',
+    nome: '', 
+    tipo: '', 
+    descricao: '', 
+    preco_unitario: 0,
     created_at: null,
-    updated_at: null,
-    endereco: '',
-    observacoes: ''
+    updated_at: null
   }
   currentPage = 1;
   itemsPerPage = 10;
@@ -33,24 +32,40 @@ export class FornecedorComponent implements OnInit {
   modoEdicao = false;
 
   private modalService = inject(NgbModal);
-
+  
   constructor(
-    private fornecedorService: FornecedorService) { 
+    private fornecedorService: FornecedorService,
+    private materialService: MaterialService
+  ) { 
+    this.getMateriais();
     this.getFornecedores();
   }
 
-  ngOnInit(): void {  
+  ngOnInit(): void {
+  }
+
+  getMateriais() {
+    this.materialList$ = this.materialService.getMateriais();
   }
 
   getFornecedores() {
-    this.fornecedorList$ = this.fornecedorService.getFornecedores();
+    this.fornecedorService.getFornecedores()
+      .subscribe(
+        (data: Fornecedor[]) => {
+          this.fornecedores = data;
+        },
+        (error) => {
+          console.error('Erro ao obter fornecedores:', error);
+        }
+      );
   }
 
-  salvarFornecedor() {
+
+  salvarMaterial() {
     if (this.modoEdicao) {
-      this.fornecedorService.updateFornecedor(this.fornecedor).subscribe({
+      this.materialService.updateMaterial(this.material).subscribe({
         next: (response) => {
-          this.getFornecedores();
+          this.getMateriais();
           this.modalService.dismissAll();
         },
         error: (error) => {
@@ -58,9 +73,9 @@ export class FornecedorComponent implements OnInit {
         }
       });
     } else {
-      this.fornecedorService.addFornecedor(this.fornecedor).subscribe({
+      this.materialService.addMaterial(this.material).subscribe({
         next: (response) => {
-          this.getFornecedores();
+          this.getMateriais();
           this.modalService.dismissAll();
         },
         error: (error) => {
@@ -69,22 +84,21 @@ export class FornecedorComponent implements OnInit {
       });
     }
   }
-  
-	open(content: TemplateRef<any>, fornecedor?: Fornecedor) {
-    this.modoEdicao = !!fornecedor;
+
+  open(content: TemplateRef<any>, material?: Material) {
+    this.modoEdicao = !!material;
     if(this.modoEdicao){
-      this.fornecedor = { ...fornecedor };
+      this.material = { ...material };
     }else{
-      this.fornecedor = {
+      this.material = {
+        id_material: 0,
         id_fornecedor: 0,
-        nome: '',
-        email: '',
-        telefone: '',
+        nome: '', 
+        tipo: '', 
+        descricao: '', 
+        preco_unitario: 0,
         created_at: null,
-        updated_at: null,
-        cnpj: '',
-        endereco: '',
-        observacoes: ''
+        updated_at: null
       };
     }
 
@@ -98,11 +112,11 @@ export class FornecedorComponent implements OnInit {
 		);
 	}
 
-  openModalExclusao(contentExclusao: TemplateRef<any>, fornecedor: Fornecedor) {
-    this.fornecedor = { ...fornecedor };
+  openModalExclusao(contentExclusao: TemplateRef<any>, material: Material) {
+    this.material = { ...material };
 		this.modalService.open(contentExclusao, { ariaLabelledBy: 'modal-basic-title' }).result.then(
 			(result) => {
-        this.fornecedorService.deleteFornecedor(fornecedor.id_fornecedor).subscribe(_=> this.getFornecedores());
+        this.materialService.deleteMaterial(material.id_material).subscribe(_=> this.getMateriais());
 				this.closeResult = `Closed with: ${result}`;        
 			},
 			(reason) => {
@@ -121,5 +135,4 @@ export class FornecedorComponent implements OnInit {
 				return `with: ${reason}`;
 		}
 	}
-  
 }

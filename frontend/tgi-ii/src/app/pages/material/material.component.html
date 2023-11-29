@@ -1,0 +1,122 @@
+<ng-template #contentExclusao let-modal>
+    <div class="modal-header pb-0">
+        <h1>Excluir Material</h1>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+            <span>&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>
+            Tem certeza que deseja deletar o material <strong>{{ material.nome }}</strong>?
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Excluir</button>
+    </div>
+</ng-template>
+
+<ng-template #content let-modal>
+    <div class="modal-header pb-0">
+        <h1>Material</h1>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+            <span>&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" name="nome" class="form-control" [(ngModel)]="material.nome" placeholder="Insira o nome do Material">
+            </div>
+          
+            <div class="form-group">
+              <label for="fornecedor">Fornecedor</label>
+              <select id="fornecedor" name="fornecedor" class="form-control" [(ngModel)]="material.id_fornecedor">
+                <option selected value="0">Selecione um fornecedor</option>
+                <option *ngFor="let fornecedor of fornecedores" [ngValue]="fornecedor.id_fornecedor">{{ fornecedor.nome }}</option>
+              </select>           
+            </div>
+          
+            <div class="form-group">
+              <label for="tipo">Tipo</label>
+              <select name="tipo" class="form-control" [(ngModel)]="material.tipo">
+                <option value="Concreto" selected>Concreto</option>
+                <option value="Aco">Aço</option>
+                <option value="Madeira">Madeira</option>
+                <option value="Alvenaria">Alvenaria</option>
+                <option value="Pisos e Revestimentos">Pisos e Revestimentos</option>
+                <option value="Isolamento">Isolamento Térmico e Acústico</option>
+                <option value="Vidro">Vidro</option>
+                <option value="Coberturas">Coberturas</option>
+                <option value="Pinturas e Revestimentos">Pinturas e Revestimentos</option>
+                <option value="Plasticos">Plásticos</option>
+                <option value="Sistemas">Sistemas Elétricos e Hidráulicos</option>
+                <option value="Sustentaveis">Materiais Sustentáveis</option>
+              </select>
+            </div>
+          
+ 
+
+            <div class="form-group">
+              <label for="precoUnitario">Preço Unitário</label>
+              <input type="text" id="precoUnitario" name="precoUnitario" class="form-control" [(ngModel)]="material.preco_unitario" placeholder="Insira o valor unitário do material">
+            </div>
+          
+            <div class="form-group">
+              <label for="descricao">Descrição</label>
+              <textarea id="descricao" name="descricao" class="form-control" [(ngModel)]="material.descricao" placeholder="Insira a descrição sobre o material..."></textarea>
+            </div>
+          
+            <button type="submit" class="btn btn-primary" (click)="salvarMaterial()">Salvar</button>
+        </form>
+    </div>
+</ng-template>
+
+<div class="row">
+    <div class="col-md-12">        
+        <div class="card">
+            <div class="card-header pb-0">
+                <div class="d-flex justify-content-between">
+                    <h2>Materiais</h2>
+                    <button mat-raised-button class="btn btn-primary" (click)="open(content)">Cadastrar</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <th>Nome</th>
+                            <th>Fornecedor</th>
+                            <th>Tipo</th>
+                            <th>Preço Unitário</th>
+                            <th>Ações</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let material of materialList$ | async | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: (materialList$ | async)?.length }">
+                                <td> {{ material.nome }} </td>
+                                <td> {{ material.id_fornecedor }} </td>
+                                <td> {{ material.tipo }} </td>
+                                <td> {{ material.preco_unitario }} </td>
+                                <td>
+                                    <button class="btn btn-primary mr-2" (click)="open(content, material)">
+                                        <i class="nc-icon nc-ruler-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-danger" (click)="openModalExclusao(contentExclusao, material)">
+                                        <i class="nc-icon nc-simple-remove"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>                    
+                </div>         
+            </div>
+            <pagination-controls style="margin-left: -30px;"
+                (pageChange)="currentPage = $event"
+                [nextLabel]="'Próximo'"
+                [previousLabel]="'Anterior'">
+            </pagination-controls>       
+        </div>
+    </div>
+</div>

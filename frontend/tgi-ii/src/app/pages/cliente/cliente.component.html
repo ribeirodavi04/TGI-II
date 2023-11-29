@@ -1,10 +1,72 @@
+<ng-template #contentExclusao let-modal>
+    <div class="modal-header pb-0">
+        <h1>Excluir Cliente</h1>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+            <span>&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>
+            Tem certeza que deseja deletar o  cliente <strong>{{ cliente.nome }}</strong>?
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Excluir</button>
+    </div>
+</ng-template>
+
+<ng-template #content let-modal>
+    <div class="modal-header pb-0">
+        <h1>Cliente</h1>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+            <span>&times;</span>
+        </button>
+    </div>
+	<div class="modal-body">
+		<form>
+            <div class="form-group">
+                <label for="nome">Nome*</label>
+                <input type="text" id="nome" name="nome" class="form-control" [(ngModel)]="cliente.nome" placeholder="Insira o nome do cliente">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email*</label>
+                <input type="email" id="email" name="email" class="form-control" [(ngModel)]="cliente.email" placeholder="Insira o email principal">
+            </div>
+
+            <div class="form-group">
+                <label for="telefone">Telefone*</label>
+                <input type="text" id="telefone" name="telefone" class="form-control" [(ngModel)]="cliente.telefone" placeholder="Insira o telefone de contato ">
+            </div>
+
+            <div class="form-group">
+                <label for="cnpj">CNPJ/CPF*</label>
+                <input type="text" id="cnpj" name="cnpj" class="form-control" [(ngModel)]="cliente.cpf_cnpj" placeholder="Insira o cnpj ou cpf"> 
+            </div>
+
+            <div class="form-group">
+                <label for="endereco">Endereço*</label>
+                <input type="text" id="endereco" name="endereco" class="form-control" [(ngModel)]="cliente.endereco" placeholder="Insira o endereço do cliente">
+            </div>
+
+            <div class="form-group">
+                <label for="observacoes">Observação</label>
+                <textarea id="observacoes" name="observacoes" class="form-control" [(ngModel)]="cliente.observacoes" placeholder="Insira observações sobre o cliente..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" (click)="salvarCliente()">Salvar</button>			
+		</form>
+	</div>
+</ng-template>
+
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    <h3>Clientes</h3>
-                    <button mat-raised-button class="btn btn-primary" (click)="openModalCliente()">Cadastrar</button>
+                    <h2>Clientes</h2>
+                    <button mat-raised-button class="btn btn-primary" (click)="open(content)">Cadastrar</button>
                 </div>
             </div>
             <div class="card-body">
@@ -24,10 +86,10 @@
                                 <td> {{ cliente.telefone}} </td>
                                 <td> {{ cliente.cpf_cnpj }} </td>
                                 <td>
-                                    <button class="btn btn-primary mr-2" (click)="openModalCliente(cliente)">
+                                    <button class="btn btn-primary mr-2" (click)="open(content, cliente)">
                                         <i class="nc-icon nc-ruler-pencil"></i>
                                     </button>
-                                    <button class="btn btn-danger">
+                                    <button class="btn btn-danger" (click)="openModalExclusao(contentExclusao, cliente)">
                                         <i class="nc-icon nc-simple-remove"></i>
                                     </button>
                                 </td>

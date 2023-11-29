@@ -14,10 +14,10 @@ export class FornecedorService {
 
   constructor( private httpClient: HttpClient) { }
 
-  getFornecedores(): Observable<Fornecedor[]> {
+  getFornecedores() {
     return this.httpClient.get<Fornecedor[]>(this.apiUrl);
   }
-
+  
   getFornecedor(id_fornecedor) {
     return this.httpClient.get<Fornecedor>(`${this.apiUrl}/${id_fornecedor}`)
   }

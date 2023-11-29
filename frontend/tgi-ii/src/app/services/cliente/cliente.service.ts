@@ -10,7 +10,7 @@ export class ClienteService {
 
   private apiUrl = environment.api_URL + 'Cliente';
 
-  constructor( private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   getClientes() {
     return this.httpClient.get<Cliente[]>(this.apiUrl);

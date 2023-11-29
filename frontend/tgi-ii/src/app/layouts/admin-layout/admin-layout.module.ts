@@ -19,10 +19,10 @@ import { IconsComponent }           from '../../pages/icons/icons.component';
 import { MapsComponent }            from '../../pages/maps/maps.component';
 import { NotificationsComponent }   from '../../pages/notifications/notifications.component';
 import { UpgradeComponent }         from '../../pages/upgrade/upgrade.component';
+
 import { FornecedorComponent }      from '../../pages/fornecedor/fornecedor.component';
-import { FornecedorFormularioComponent } from 'app/components/forms/fornecedor-formulario/fornecedor-formulario.component';
-import { ClienteComponent } from 'app/pages/cliente/cliente.component';
-import { ClienteFormularioComponent } from 'app/components/forms/cliente-formulario/cliente-formulario.component';
+import { ClienteComponent }         from 'app/pages/cliente/cliente.component';
+import { MaterialComponent }        from 'app/pages/material/material.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -52,9 +52,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MapsComponent,
     NotificationsComponent,
     FornecedorComponent,
-    FornecedorFormularioComponent,
     ClienteComponent,
-    ClienteFormularioComponent
+    MaterialComponent
   ]
 })
 

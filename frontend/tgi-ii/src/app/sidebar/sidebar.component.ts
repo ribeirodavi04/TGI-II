@@ -9,11 +9,12 @@ export interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard',     title: 'Home',         icon:'nc-bank',       class: '' },
-    { path: '/icons',         title: 'Projetos',             icon:'nc-ruler-pencil',    class: '' },
-    { path: '/cliente',       title: 'Clientes',              icon:'nc-single-02',      class: '' },
-    { path: '/fornecedor',    title: 'Fornecedores',        icon:'nc-delivery-fast',  class: '' },
-    { path: '/notifications', title: 'Usuários',     icon:'nc-circle-10',    class: '' },
+    { path: '/dashboard',     title: 'Home',            icon:'nc-bank',             class: '' },
+    { path: '/icons',         title: 'Projetos',        icon:'nc-ruler-pencil',     class: '' },
+    { path: '/cliente',       title: 'Clientes',        icon:'nc-single-02',        class: '' },
+    { path: '/fornecedor',    title: 'Fornecedores',    icon:'nc-delivery-fast',    class: '' },
+    { path: '/material',      title: 'Materiais',       icon:'nc-settings',         class: '' },
+    { path: '/notifications', title: 'Usuários',        icon:'nc-circle-10',        class: '' },
     //{ path: '/user',          title: 'User Profile',      icon:'nc-single-02',  class: '' },
     //{ path: '/table',         title: 'Table List',        icon:'nc-tile-56',    class: '' },
     //{ path: '/typography',    title: 'Typography',        icon:'nc-caps-small', class: '' },

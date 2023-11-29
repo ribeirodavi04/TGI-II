@@ -3,7 +3,7 @@ const Cliente = use('App/Models/Cliente');
 
 class ClienteController {
     async index({ response }) {
-        const clientes = await Cliente.all();
+        const clientes = await Cliente.query().orderBy('created_at', 'desc').fetch();
         return response.json(clientes);
     }
 

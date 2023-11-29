@@ -2,7 +2,7 @@ const Fornecedor = use('App/Models/Fornecedor');
 
 class FornecedorController {
     async index({ response }) {
-        const fornecedores = await Fornecedor.all();
+        const fornecedores = await Fornecedor.query().orderBy('created_at', 'desc').fetch();
         return response.json(fornecedores);
     }
 
