@@ -41,8 +41,9 @@
           
             <div class="form-group">
               <label for="tipo">Tipo</label>
-              <select name="tipo" class="form-control" [(ngModel)]="material.tipo">
-                <option value="Concreto" selected>Concreto</option>
+              <select id="tipo" name="tipo" class="form-control" [(ngModel)]="material.tipo">
+                <option selected value="0">Selecione um tipo de material</option>
+                <option value="Concreto">Concreto</option>
                 <option value="Aco">Aço</option>
                 <option value="Madeira">Madeira</option>
                 <option value="Alvenaria">Alvenaria</option>
@@ -55,13 +56,16 @@
                 <option value="Sistemas">Sistemas Elétricos e Hidráulicos</option>
                 <option value="Sustentaveis">Materiais Sustentáveis</option>
               </select>
-            </div>
-          
- 
+            </div>          
 
             <div class="form-group">
               <label for="precoUnitario">Preço Unitário</label>
-              <input type="text" id="precoUnitario" name="precoUnitario" class="form-control" [(ngModel)]="material.preco_unitario" placeholder="Insira o valor unitário do material">
+              <input type="text"  id="precoUnitario"  name="precoUnitario"  class="form-control" placeholder="Digite o preço unitário do material"
+                [(ngModel)]="material.preco_unitario"  
+                [mask]="'separator.2'" 
+                [prefix]="'R$ '"
+                [thousandSeparator]="'.'"
+                [decimalMarker]="','">
             </div>
           
             <div class="form-group">
@@ -86,7 +90,7 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table">
-                        <thead class=" text-primary">
+                        <thead class="text-primary">
                             <th>Nome</th>
                             <th>Fornecedor</th>
                             <th>Tipo</th>
@@ -95,10 +99,10 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let material of materialList$ | async | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: (materialList$ | async)?.length }">
-                                <td> {{ material.nome }} </td>
-                                <td> {{ material.id_fornecedor }} </td>
-                                <td> {{ material.tipo }} </td>
-                                <td> {{ material.preco_unitario }} </td>
+                                <td class="pl-3"> {{ material.nome }} </td>
+                                <td class="pl-3"> {{ material.fornecedor.nome }} </td>
+                                <td class="pl-3"> {{ material.tipo }} </td>
+                                <td class="pl-3"> {{ material.preco_unitario | currency : 'BRL' }} </td>
                                 <td>
                                     <button class="btn btn-primary mr-2" (click)="open(content, material)">
                                         <i class="nc-icon nc-ruler-pencil"></i>

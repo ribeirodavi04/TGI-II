@@ -5,6 +5,9 @@ import { Fornecedor } from 'app/models/Fornecedor.model';
 import { FornecedorService } from 'app/services/fornecedor.service';
 import { Observable } from 'rxjs';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { CurrencyPipe } from '@angular/common'; 
+
+
 
 @Component({
   selector: 'material',
@@ -14,28 +17,28 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class MaterialComponent implements OnInit {
 
-  materialList$ = new Observable<Material[]>();
+  materialList$: Observable<Material[]>;
   fornecedores: Fornecedor[] = [];
   material: Material = {
     id_material: 0,
     id_fornecedor: 0,
     nome: '', 
-    tipo: '', 
+    tipo: '0', 
     descricao: '', 
-    preco_unitario: 0,
+    preco_unitario: null,
     created_at: null,
-    updated_at: null
-  }
+    updated_at: null,
+    fornecedor: null
+  };
   currentPage = 1;
   itemsPerPage = 10;
   closeResult = '';
   modoEdicao = false;
 
-  private modalService = inject(NgbModal);
-  
   constructor(
     private fornecedorService: FornecedorService,
-    private materialService: MaterialService
+    private materialService: MaterialService,
+    private modalService: NgbModal,    
   ) { 
     this.getMateriais();
     this.getFornecedores();
@@ -60,26 +63,25 @@ export class MaterialComponent implements OnInit {
       );
   }
 
-
   salvarMaterial() {
     if (this.modoEdicao) {
       this.materialService.updateMaterial(this.material).subscribe({
-        next: (response) => {
+        next: () => {
           this.getMateriais();
           this.modalService.dismissAll();
         },
         error: (error) => {
-          console.error('Erro ao editar fornecedor', error);
+          console.error('Erro ao editar material', error);
         }
       });
     } else {
       this.materialService.addMaterial(this.material).subscribe({
-        next: (response) => {
+        next: () => {
           this.getMateriais();
           this.modalService.dismissAll();
         },
         error: (error) => {
-          console.error('Erro ao criar fornecedor', error);
+          console.error('Erro ao criar material', error);
         }
       });
     }
@@ -87,52 +89,54 @@ export class MaterialComponent implements OnInit {
 
   open(content: TemplateRef<any>, material?: Material) {
     this.modoEdicao = !!material;
-    if(this.modoEdicao){
+    if (this.modoEdicao) {
       this.material = { ...material };
-    }else{
+    } else {
       this.material = {
         id_material: 0,
         id_fornecedor: 0,
         nome: '', 
-        tipo: '', 
+        tipo: '0', 
         descricao: '', 
-        preco_unitario: 0,
+        preco_unitario: null,
         created_at: null,
-        updated_at: null
+        updated_at: null,
+        fornecedor: null
       };
     }
 
-		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-			(result) => {
-				this.closeResult = `Closed with: ${result}`;
-			},
-			(reason) => {
-				this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-			},
-		);
-	}
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      },
+    );
+  }
 
   openModalExclusao(contentExclusao: TemplateRef<any>, material: Material) {
     this.material = { ...material };
-		this.modalService.open(contentExclusao, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-			(result) => {
-        this.materialService.deleteMaterial(material.id_material).subscribe(_=> this.getMateriais());
-				this.closeResult = `Closed with: ${result}`;        
-			},
-			(reason) => {
-				this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-			},
-		);
-	}
+    this.modalService.open(contentExclusao, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      (result) => {
+        this.materialService.deleteMaterial(material.id_material).subscribe(_ => this.getMateriais());
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      },
+    );
+  }
 
-	private getDismissReason(reason: any): string {
-		switch (reason) {
-			case ModalDismissReasons.ESC:
-				return 'by pressing ESC';
-			case ModalDismissReasons.BACKDROP_CLICK:
-				return 'by clicking on a backdrop';
-			default:
-				return `with: ${reason}`;
-		}
-	}
+  private getDismissReason(reason: any): string {
+    switch (reason) {
+      case ModalDismissReasons.ESC:
+        return 'by pressing ESC';
+      case ModalDismissReasons.BACKDROP_CLICK:
+        return 'by clicking on a backdrop';
+      default:
+        return `with: ${reason}`;
+    }
+  }
+
 }

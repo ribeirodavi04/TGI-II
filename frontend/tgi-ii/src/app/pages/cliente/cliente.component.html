@@ -81,10 +81,10 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let cliente of clienteList$ | async | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: (clienteList$ | async)?.length }">
-                                <td> {{ cliente.nome }} </td>
-                                <td> {{ cliente.email}} </td>
-                                <td> {{ cliente.telefone}} </td>
-                                <td> {{ cliente.cpf_cnpj }} </td>
+                                <td class="pl-3"> {{ cliente.nome }} </td>
+                                <td class="pl-3"> {{ cliente.email}} </td>
+                                <td class="pl-3"> {{ cliente.telefone}} </td>
+                                <td class="pl-3"> {{ cliente.cpf_cnpj }} </td>
                                 <td>
                                     <button class="btn btn-primary mr-2" (click)="open(content, cliente)">
                                         <i class="nc-icon nc-ruler-pencil"></i>

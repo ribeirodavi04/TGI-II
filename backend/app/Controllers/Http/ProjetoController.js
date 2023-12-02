@@ -9,12 +9,26 @@ const Env = use('Env');
 
 class ProjetoController {
     async index({ response }) {
-        const projetos = await Projeto.all();
+        const projetos = await Projeto.query()
+            .with('cliente')
+            .with('etapasProjeto')
+            .orderBy('created_at', 'desc')
+            .fetch();
         return response.json(projetos);
     }
 
     async show({ params, response }) {
-        const projeto = await Projeto.find(params.id);
+        const projeto = await Projeto.query()
+            .with('orcamentoMateriaisProjeto')
+            .with('orcamentosProjeto')
+            .with('documentosProjeto')
+            .with('imagensProjeto')
+            .with('etapasProjeto')
+            .with('cliente')
+            .with('usuario')
+            .where('id_projeto', params.id)
+            .firstOrFail();
+
         return response.json(projeto);
     }
 

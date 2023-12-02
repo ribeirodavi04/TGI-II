@@ -3,7 +3,7 @@ const Material = use('App/Models/Material');
 class MaterialController {
 
   async index({ response }) {
-    const materials = await Material.query().orderBy('created_at', 'desc').fetch();
+    const materials = await Material.query().with('fornecedor').orderBy('created_at', 'desc').fetch();
     return response.json(materials);
   }
 

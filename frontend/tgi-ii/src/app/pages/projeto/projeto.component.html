@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-md-12" *ngFor="let projeto of projetoList$ | async | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: (projetoList$ | async)?.length }">
+        <div class="card p-2">
+            <div class="card-header d-flex justify-content-between">
+                <h1 class="pb-0"> {{ projeto.nome }} </h1>
+                <p class="text-warning"><b> • {{ projeto.etapasProjeto[projeto.etapasProjeto.length - 1].status }} </b></p>
+            </div>
+            <hr />
+            <div class="card-body d-flex justify-content-between">
+                <div class="infos">
+                    <p>Cliente: {{ projeto.cliente.nome }}</p>
+                    <p>Endereço: {{ projeto.endereco}}</p>
+                </div>
+                <button class="btn btn-sm btn-primary" (click)="abrirDetalhes(projeto.id_projeto)">Ver mais</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="p-0 pt-1 btn btn-lg btn-success rounded-circle btnAddProject" 
+    placement="left"
+    ngbTooltip="Adicionar Projeto">
+    <i class="nc-icon nc-simple-add"></i>
+</button>
+
+  
+
