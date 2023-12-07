@@ -46,8 +46,7 @@ export class ProjetoDatlhesComponent implements OnInit {
       nome: '',
       status: '',
       observacao: '',
-      data_inicio: new Date(),
-      data_final: new Date(null),
+      data_inicio: new Date()
     };
   }
 
@@ -84,8 +83,7 @@ export class ProjetoDatlhesComponent implements OnInit {
   }
 
   salvarEtapa() {
-    console.log(this.etapaProjeto)
-    alert('cu');
+    console.log(this.etapaProjeto);
     this.etapaProjetoService.addEtapaProjeto(this.etapaProjeto).subscribe({
       next: () => {
         this.getProjeto();

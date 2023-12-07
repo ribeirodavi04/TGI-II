@@ -7,6 +7,6 @@ export interface EtapaProjeto {
     status: string;
     observacao: string;
     data_inicio: Date;
-    data_final: Date;
+    data_final?: Date;
     projeto?: Projeto;
 }

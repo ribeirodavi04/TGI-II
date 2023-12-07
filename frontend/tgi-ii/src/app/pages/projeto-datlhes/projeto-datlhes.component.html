@@ -7,7 +7,7 @@
         </button>
     </div>
 
-    <div class="modal-body">
+    <div class="modal-body modal-lg">
         <form>
             <div class="form-group" >
               <label for="nome">Nome</label>
@@ -18,7 +18,15 @@
               <label for="descricao">Relatório </label>
               <textarea id="descricao" name="observacao" class="form-control" [(ngModel)]="etapaProjeto.observacao" placeholder="Digite o relatório da sobre essa etapa..."></textarea>
             </div>
-          
+
+            <div class="form-group">
+                <label for="imagem">Enviar Imagens</label>
+                <div class="custom-file">
+                    <input type="file" id="imagem" name="imagem" class="custom-file-input" (change)="handleFileInput($event)" multiple>
+                    <label class="custom-file-label" for="imagem">Escolha arquivos</label>
+                </div>
+            </div>
+            
             <button type="submit" class="btn btn-primary" (click)="salvarEtapa()">Salvar</button>
         </form>
     </div>
