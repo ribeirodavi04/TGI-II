@@ -23,7 +23,7 @@ class EtapaProjeto extends Model {
             status: 'max:100',
             observacao: 'max:100',
             data_inicio: 'required|date',
-            data_final: 'required|date',
+            data_final: 'date',
         };
     }
 

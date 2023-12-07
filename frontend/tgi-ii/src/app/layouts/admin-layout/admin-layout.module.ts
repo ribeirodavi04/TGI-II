@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID } from '@angular/core';
 
@@ -45,7 +46,8 @@ registerLocaleData(ptBr);
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgbNavModule
   ],
   declarations: [
     DashboardComponent,

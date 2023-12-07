@@ -44,7 +44,7 @@ class Projeto extends Model {
     }
 
     orcamentosProjeto() {
-        return this.hasMany('App/Models/OrcamentoMaterialProjeto', 'id_projeto', 'id_projeto');
+        return this.hasMany('App/Models/OrcamentoProjeto', 'id_projeto', 'id_projeto');
     }
 
     documentosProjeto() {

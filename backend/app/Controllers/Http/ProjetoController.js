@@ -19,11 +19,15 @@ class ProjetoController {
 
     async show({ params, response }) {
         const projeto = await Projeto.query()
-            .with('orcamentoMateriaisProjeto')
+            .with('orcamentoMateriaisProjeto', (builder) => {
+                builder.with('material');
+            })
             .with('orcamentosProjeto')
             .with('documentosProjeto')
             .with('imagensProjeto')
-            .with('etapasProjeto')
+            .with('etapasProjeto', (builder) => {
+                builder.orderBy('created_at', 'desc'); 
+            })
             .with('cliente')
             .with('usuario')
             .where('id_projeto', params.id)
@@ -72,7 +76,9 @@ class ProjetoController {
 
     async showAllInfo({ params, response }) {
         const projeto = await Projeto.query()
-            .with('orcamentoMateriaisProjeto')
+            .with('orcamentoMateriaisProjeto', (builder) => {
+                builder.with('material');
+            })
             .with('orcamentosProjeto')
             .with('documentosProjeto')
             .with('imagensProjeto')
